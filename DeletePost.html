@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Delete Posts: </h1>
+        <form action="DeletePost.php" method="post">
+                List of users can be seen below:</br>
+
+                <label for="users">Choose a Post to delete:</label>
+                    <?php
+                        $mysqli = new mysqli("mysql.eecs.ku.edu", "granthenry", "thie4Eed", "granthenry");
+                        $query = "SELECT user_id FROM Users";
+                        $userExist = $mysqli->query($query);
+                        if($userExist->num_rows >= 1)
+                        {
+                            echo "</br>Posts in database:</br>";
+                            while($rowList = $userExist->fetch_assoc())
+                            {
+                                echo 'Author Id: <input type= "checkbox" name = "' . $rowList["user_id"] . '" value = "' . $rowList["user_id"] . '">' . $rowList["user_id"] . '</br>';
+                                echo 'Post content: (Could not figure out how to display this from exercise 6) </br></br>';
+                            }
+                        }
+                    ?>
+                <input type = "submit" id = "usernameSelection" value = "Submit"></br>
+                <?php include 'DeletePost.php';?>
+        </form>
+        <p>Return home : <a href = "https://people.eecs.ku.edu/~g666h480/Lab10/AdminHome.html">here</a>.</p>
+    </body>
+</html>

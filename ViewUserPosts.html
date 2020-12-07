@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>View User Posts: </h1>
+        <form action="CreatePosts.php" method="get">
+                List of users can be seen below:</br>
+
+                <label for="users">Choose a user:</label>
+                <select name = "users" id = "users">
+                    <?php
+                        $mysqli = new mysqli("mysql.eecs.ku.edu", "granthenry", "thie4Eed", "granthenry");
+                        $query = "SELECT user_id FROM Users";
+                        $userExist = $mysqli->query($query);
+                        if($userExist->num_rows >= 1)
+                        {
+                            echo "Here are the users in this database:</br>";
+                            while($rowList = $userExist->fetch_assoc())
+                            {
+                                echo '<option value = "' . $rowList["user_id"] . '">' . $rowList["user_id"] . '</option>';
+                            }
+                        }
+                    ?>
+                </select>
+                <input type = "submit" id = "usernameSelection" value = "Submit"></br>
+                <?php include 'ViewUserPosts.php';?>
+        </form>
+        <p>Return home : <a href = "https://people.eecs.ku.edu/~g666h480/Lab10/AdminHome.html">here</a>.</p>
+    </body>
+</html>
